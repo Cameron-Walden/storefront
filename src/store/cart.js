@@ -13,7 +13,6 @@ const cartReducer = (state = initialState, action) => {
   }
 }
 
-//gonna use this in storefront/products. alternatively could bring there
 export const addToCart = name =>{
   return {
     type: 'ADD_TO_CART',
