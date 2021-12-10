@@ -1,10 +1,9 @@
 import { createStore, combineReducers } from 'redux';
+import categoriesReducer from './categories.js';
+import productReducer from './products.js';
 import cartReducer from './cart';
-import categoryReducer from './categories';
-import productReducer from './products';
 
-
-let reducers = combineReducers({categories: categoryReducer, products: productReducer, cart: cartReducer});
+const reducers = combineReducers({categories: categoriesReducer, products: productReducer, cart: cartReducer})
 
 const store = () => {
   return createStore(reducers);

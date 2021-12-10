@@ -8,17 +8,14 @@ import ViewProducts from '../src/components/storefront/products.js';
 
 const App = () => {
   return (
-    <div className="App">
+    <>
       <Header/>
       <SimpleCart/>
       <ViewCategories/>
       <ViewProducts/>
       <Footer/>
-   
-    </div>
+    </>
   );
 }
-
-
 
 export default App;

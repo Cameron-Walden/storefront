@@ -1,33 +1,23 @@
-let initialState = {
-  categories: [
-    {categoryName: 'Music', description: 'Select genre' },
-    {categoryName: 'Books', description: 'Select genre' },
+const initialState = {
+  allCategories: [
+    {name: 'Music', description: 'Select Genre' },
+    {name: 'Books', description: 'Select Genre' }
   ],
   activeCategory: '',
-  activeDescription: ''
+  activeDescription: '',
 }
 
 const categoryReducer = (state = initialState, action) => {
 
   let { type, payload } = action;
-
-  switch(type){
+  
+  switch (type) {
+    case 'INACTIVE':
+      return initialState;
     case 'ACTIVE':
-      return {...state, activeCategory: payload.category};
-      case 'INACTIVE':
-        return initialState;
-        default:
-          return state;
-  }
-}
-
-export const active = (category, description) => {
-  return {
-    type: 'ACTIVE',
-    payload: {
-      category,
-      description
-    }
+      return { ...state, activeCategory: payload.category, activeDescription: payload.description }
+    default:
+      return state;
   }
 }
 
@@ -37,16 +27,14 @@ export const inactive = () => {
   }
 }
 
+export const active = (category, description) => {
+  return {
+    type: "ACTIVE",
+    payload: {
+      category,
+      description
+    }
+  }
+}
+
 export default categoryReducer;
-
-// Shows a list of all categories
-
-// Dispatches an action when one is clicked to “activate” it
-
-// State should contain a list of categories as well as the active category
-
-// Each category should have a normalized name, display name, and a description
-
-// Create an action that will trigger the reducer to change the active category
-
-// Update the active category in the reducer when this action is dispatched
