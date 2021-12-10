@@ -1,43 +1,43 @@
-import React from "react";
-import { active, inactive } from '../../store/categories.js';
-import { addToCart } from  "../../store/cart.js";
-import { getProducts } from "../../store/products";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
+import { inactive, active } from '../../store/categories.js';
+import { getProducts } from '../../store/products.js';
+import { addToCart } from '../../store/cart.js';
+import { Typography, Button, Grid } from '@material-ui/core';
 
-// const getProducts = category => {
-//   const products = initialState.products;
-//   const response = products.filter(product => product.category === category);
-//   return response;
-// }
-
-
-const viewProducts = (props) => {
+const viewProducts = props => {
   return (
-    <>
+  <>    
+  {props.products.allProducts.map((product, index) => {
+            if (product.category === props.activeCategory) {
+              return (
+                <Grid item key={index}>
+                    <p>{product.name}</p>
+                      <Typography>${product.price}</Typography>
+                      <Button size = "small" variant="contained" color="success" onClick={() => props.addToCart(product)}> Add to Cart </Button>
+                </Grid>
+              )
+            } else {
+              return null;
+            }
+          })}
     </>
   )
-};
+}
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
-    activeCategory: state.activeCategory,
-    activeDescription: state.activeDescription,
-  };
-};
-
-// const mapDispatchToProps = () => {
-//   active,
-//   inactive,
-//   addToCart,
-//   getProducts
-// }
+    products: state.products, 
+    activeCategory: state.categories.activeCategory, 
+    activeDescription: state.description
+  }
+}
 
 const dispatch = {
-  active,
   inactive,
-  addToCart,
+  active,
   getProducts,
-};
+  addToCart,
+}
 
 export default connect(mapStateToProps, dispatch)(viewProducts);

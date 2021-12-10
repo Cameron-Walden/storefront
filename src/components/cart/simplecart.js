@@ -1,28 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux'
-
-// import Grid from '@material-ui/core/Grid';
-// import Card from '@material-ui/core/Card';
-
+import { connect } from 'react-redux';
 
 const SimpleCart = props => {
-  return(
-    <>
-    <p>CART:</p>
-    </>
-  )
-}
 
-const mapStateToProps = state => {
-  return{
-    cart: state.cart
+  if (props.cart.length > 0) {
+    return (
+      <>
+       <p>Cart:</p>
+            {props.cart.map((product, item) => {
+              return (
+                <h3 key={item}>
+                  {product.name}
+                </h3>
+              )
+            })}
+      </>
+    )
+  } else {
+    return null
   }
 }
 
-  
-  // const mapDispatchToProps = dispatch => ({
-
-  // });
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+  }
+}
 
 export default connect(mapStateToProps)(SimpleCart);
-
