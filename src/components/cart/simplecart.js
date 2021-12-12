@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { removeFromCart } from '../../store/cart';
+import { Button } from '@material-ui/core';
 
 //shoutout to katy roffe for helping me with being able to view items in the cart
 const SimpleCart = props => {
@@ -7,15 +9,16 @@ const SimpleCart = props => {
   if (props.cart.cart.length > 0) {
     return (
       <>
-       <p>Cart:
-            {props.cart.cart.map((product, item) => {
-              return (
+        {props.cart.cart.map((product, item) => {
+          return (
+                <>
                 <h3 key={item}>
                   {product.name}
-                </h3> 
+                </h3>
+                <Button variant="contained" color="secondary" onClick={() => props.removeFromCart(product)}>Remove from cart</Button>
+                </>
               )
             })}
-          </p>
       </>
     )
   } else {
@@ -29,4 +32,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(SimpleCart);
+const mapDispatchToProps = {
+  removeFromCart
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

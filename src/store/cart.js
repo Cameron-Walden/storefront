@@ -10,7 +10,16 @@ const cartReducer = (state = initialState, action) => {
     case 'ADD_TO_CART':
       return { ...state, cart: [...state.cart, payload] }
       case 'REMOVE_FROM_CART':
-        return { }
+        let removeProduct = true;
+        const updatedCart = [...state.cart].filter(product => {
+          if(product === payload && removeProduct) {
+            removeProduct = false;
+            return false;
+          } else {
+            return true;
+          }
+        })
+        return { ...state, cart: [...updatedCart] }
     default:
       return state;
   }
@@ -19,7 +28,7 @@ const cartReducer = (state = initialState, action) => {
 export const addToCart = name => {
   return {
     type: 'ADD_TO_CART',
-    payload: name,
+    payload: name
   }
 }
 
