@@ -25,18 +25,18 @@ const cartReducer = (state = initialState, action) => {
   }
 }
 
-export const addToCart = name => {
-  return {
+export const addToCart = name => async (dispatch) => {
+  dispatch ({
     type: 'ADD_TO_CART',
     payload: name
-  }
-}
+  });
+};
 
-export const removeFromCart = name => {
-  return{
+export const removeFromCart = name => async (dispatch) => {
+  dispatch({
     type: 'REMOVE_FROM_CART',
     payload: name
-  }
-}
+  });
+};
 
 export default cartReducer;

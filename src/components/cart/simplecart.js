@@ -32,8 +32,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = {
-  removeFromCart
-}
+const mapDispatchToProps = dispatch => ({
+  removeFromCart: product => dispatch(removeFromCart(product))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);
